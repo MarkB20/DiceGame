@@ -8,74 +8,72 @@
     tools:context=".NewGame">
 
     <ImageView
-        android:id="@+id/p1Dice15"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:id="@+id/CPUDice3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="247dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/p1Dice19"
-        app:layout_constraintStart_toEndOf="@+id/p1Dice16"
+        android:layout_marginBottom="54dp"
+        app:layout_constraintBottom_toTopOf="@+id/Throw"
+        app:layout_constraintEnd_toStartOf="@+id/CPUDice4"
+        app:layout_constraintStart_toEndOf="@+id/CPUDice2"
         app:layout_constraintTop_toBottomOf="@+id/CPUReRolls"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
-        android:id="@+id/p1Dice17"
+        android:id="@+id/CPUDice5"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="19dp"
-        android:layout_marginBottom="247dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/CPUDice4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/p1Dice19"
-        app:layout_constraintTop_toBottomOf="@+id/P1Dice5"
+        app:layout_constraintStart_toEndOf="@+id/CPUDice4"
+        app:layout_constraintTop_toTopOf="@+id/CPUDice4"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
-        android:id="@+id/p1Dice18"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:id="@+id/CPUDice1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="247dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/p1Dice16"
+        app:layout_constraintBottom_toBottomOf="@+id/CPUDice2"
+        app:layout_constraintEnd_toStartOf="@+id/CPUDice2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CPURollScore"
+        app:layout_constraintTop_toTopOf="@+id/CPUDice2"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
-        android:id="@+id/p1Dice19"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:id="@+id/CPUDice4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/p1Dice17"
-        app:layout_constraintEnd_toStartOf="@+id/p1Dice17"
-        app:layout_constraintStart_toEndOf="@+id/p1Dice15"
-        app:layout_constraintTop_toTopOf="@+id/p1Dice17"
+        app:layout_constraintBottom_toBottomOf="@+id/CPUDice3"
+        app:layout_constraintEnd_toStartOf="@+id/CPUDice5"
+        app:layout_constraintStart_toEndOf="@+id/CPUDice3"
+        app:layout_constraintTop_toTopOf="@+id/CPUDice3"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
-        android:id="@+id/p1Dice16"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="247dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/p1Dice15"
-        app:layout_constraintStart_toEndOf="@+id/p1Dice18"
-        app:layout_constraintTop_toBottomOf="@+id/PlayerRollScore"
+        android:id="@+id/CPUDice2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="17dp"
+        app:layout_constraintBottom_toBottomOf="@+id/CPUDice3"
+        app:layout_constraintEnd_toStartOf="@+id/CPUDice3"
+        app:layout_constraintStart_toEndOf="@+id/CPUDice1"
+        app:layout_constraintTop_toTopOf="@+id/CPUDice3"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/rounds"
         android:layout_width="97dp"
-        android:layout_height="0dp"
+        android:layout_height="27dp"
         android:layout_marginTop="68dp"
-        android:layout_marginBottom="258dp"
+        android:layout_marginBottom="66dp"
         android:text="round: 1"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/CPUReRolls"
+        app:layout_constraintBottom_toBottomOf="@+id/PlayerRollScore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -85,7 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="13dp"
         android:text="player: 0"
         app:layout_constraintBottom_toTopOf="@+id/PlayerRollScore"
         app:layout_constraintStart_toStartOf="@+id/PlayerRollScore" />
@@ -94,19 +92,17 @@
         android:id="@+id/PlayerRollScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="85dp"
-        android:layout_marginBottom="320dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="142dp"
         android:text="P1 roll score: 0"
-        app:layout_constraintBottom_toTopOf="@+id/p1Dice16"
-        app:layout_constraintStart_toStartOf="@+id/P1Dice1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/P1ReRolls"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="28dp"
         android:text="re-rolls: 2"
         app:layout_constraintStart_toEndOf="@+id/rounds"
@@ -114,56 +110,62 @@
 
     <ImageView
         android:id="@+id/P1Dice1"
-        android:layout_width="60dp"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="59dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="192dp"
+        android:layout_marginTop="82dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="82dp"
         app:layout_constraintBottom_toTopOf="@+id/CPUScore"
+        app:layout_constraintEnd_toStartOf="@+id/P1Dice2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/playerScore"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
         android:id="@+id/P1Dice2"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="192dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/P1Dice3"
+        app:layout_constraintEnd_toStartOf="@+id/P1Dice3"
+        app:layout_constraintStart_toEndOf="@+id/P1Dice1"
+        app:layout_constraintTop_toTopOf="@+id/P1Dice3"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
         android:id="@+id/P1Dice5"
-        android:layout_width="60dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="332dp"
-        android:layout_marginTop="192dp"
-        android:layout_marginBottom="172dp"
-        app:layout_constraintBottom_toTopOf="@+id/p1Dice17"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="19dp"
+        app:layout_constraintBottom_toBottomOf="@+id/P1Dice4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/P1Dice4"
+        app:layout_constraintTop_toTopOf="@+id/P1Dice4"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
         android:id="@+id/P1Dice3"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="192dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="82dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="81dp"
+        app:layout_constraintBottom_toTopOf="@+id/CPUScore"
+        app:layout_constraintEnd_toStartOf="@+id/P1Dice4"
+        app:layout_constraintStart_toEndOf="@+id/P1Dice2"
+        app:layout_constraintTop_toTopOf="@+id/playerScore"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
         android:id="@+id/P1Dice4"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="252dp"
-        android:layout_marginTop="192dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/P1Dice3"
+        app:layout_constraintEnd_toStartOf="@+id/P1Dice5"
+        app:layout_constraintStart_toEndOf="@+id/P1Dice3"
+        app:layout_constraintTop_toTopOf="@+id/P1Dice3"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -171,11 +173,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="25dp"
         android:text="CPU: 0"
         app:layout_constraintBottom_toTopOf="@+id/CPURollScore"
-        app:layout_constraintStart_toStartOf="@+id/CPURollScore"
-        app:layout_constraintTop_toBottomOf="@+id/P1Dice1" />
+        app:layout_constraintStart_toStartOf="@+id/CPURollScore" />
 
     <TextView
         android:id="@+id/CPURollScore"
@@ -184,26 +185,24 @@
         android:layout_marginStart="33dp"
         android:layout_marginBottom="28dp"
         android:text="CPU roll score: 0"
-        app:layout_constraintBottom_toTopOf="@+id/p1Dice18"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CPUScore" />
+        app:layout_constraintBottom_toTopOf="@+id/CPUDice1"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/CPUReRolls"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
         android:text="re-rolls: 2"
-        app:layout_constraintBottom_toTopOf="@+id/p1Dice15"
-        app:layout_constraintStart_toStartOf="@+id/p1Dice19"
-        app:layout_constraintTop_toBottomOf="@+id/rounds" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/CPUDice4"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/Throw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
-        android:layout_marginBottom="37dp"
+        android:layout_marginBottom="36dp"
         android:text="Throw"
         app:layout_constraintBottom_toTopOf="@+id/Score"
         app:layout_constraintStart_toStartOf="@+id/Score" />

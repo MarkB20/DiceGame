@@ -8,11 +8,77 @@
 
     <TextView
         android:id="@+id/endRound"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="94dp"
+        android:layout_height="0dp"
         android:layout_marginTop="92dp"
-        android:text="TextView"
+        android:layout_marginBottom="41dp"
+        android:text="round: 2"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/P1Score"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/P1Score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="19dp"
+        android:text="player score: 30"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/CPUScoreF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/endRound" />
+
+    <TextView
+        android:id="@+id/CPUScoreF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginBottom="20dp"
+        android:text="Cpu score: 20"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/Winner"
+        app:layout_constraintStart_toStartOf="@+id/P1Score"
+        app:layout_constraintTop_toBottomOf="@+id/P1Score" />
+
+    <TextView
+        android:id="@+id/Winner"
+        android:layout_width="139dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="35dp"
+        android:text="Player Wins"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/NewGame2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CPUScoreF" />
+
+    <Button
+        android:id="@+id/NewGame2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="41dp"
+        android:text="new game"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/MainMenu"
+        app:layout_constraintStart_toStartOf="@+id/MainMenu"
+        app:layout_constraintTop_toBottomOf="@+id/Winner" />
+
+    <Button
+        android:id="@+id/MainMenu"
+        android:layout_width="217dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="205dp"
+        android:text="Main Menu"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NewGame2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
