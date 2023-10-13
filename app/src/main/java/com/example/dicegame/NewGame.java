@@ -10,7 +10,7 @@ public class NewGame extends AppCompatActivity  {
     //initializing the dice images for both player (P1) and computer(CPU)
     ImageView[] P1Dice = new ImageView[5];
     ImageView[] CPUDice = new ImageView[5];
-
+    boolean[] reRoll = new boolean[5];
 
 
     @Override
@@ -32,8 +32,9 @@ public class NewGame extends AppCompatActivity  {
         CPUDice[3]= ( ImageView) findViewById(R.id.CPUDice4);
         CPUDice[4]= ( ImageView) findViewById(R.id.CPUDice5);
 
-        DiceInitializer diceInitializer = new DiceInitializer();
-        diceInitializer.diceInt(P1Dice,CPUDice);
+        DiceRoller diceRoller = new DiceRoller();
+        diceRoller.diceInt(P1Dice,CPUDice);
+
 
 
     }
