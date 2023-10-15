@@ -5,10 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.stream.IntStream;
 
 
 public class NewGame extends AppCompatActivity  {
@@ -32,16 +29,10 @@ public class NewGame extends AppCompatActivity  {
     TextView roundsTxt;
     int rounds = 0;
 
-    // player text
-    TextView playerScore;
-    TextView playerRollScore;
-    TextView P1ReRolls;
 
-    // CPU text
-    TextView CPUScore;
-    TextView CPURollScore;
-    TextView CPUReRolls;
 
+    // Strings for each TextView display
+    String roundTxt = "round: ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,36 +63,56 @@ public class NewGame extends AppCompatActivity  {
         roundsTxt = (TextView) findViewById(R.id.rounds);
 
         // assigning each textview for P1
-        playerScore = (TextView) findViewById(R.id.playerScore);
-        playerRollScore = (TextView) findViewById(R.id.PlayerRollScore);
-        P1ReRolls = (TextView) findViewById(R.id.P1ReRolls);
+        P1.ScoreTxt = (TextView) findViewById(R.id.playerScore);
+        P1.RollScoreTxt = (TextView) findViewById(R.id.PlayerRollScore);
+        P1.ReRollsTxt = (TextView) findViewById(R.id.P1ReRolls);
 
         // assigning each textview for CPU
-        CPUScore = (TextView) findViewById(R.id.CPUScore);
-        CPURollScore = (TextView) findViewById(R.id.CPURollScore);
-        CPUReRolls = (TextView) findViewById(R.id.CPUReRolls);
+        CPU.ScoreTxt = (TextView) findViewById(R.id.CPUScore);
+        CPU.RollScoreTxt = (TextView) findViewById(R.id.CPURollScore);
+        CPU.ReRollsTxt = (TextView) findViewById(R.id.CPUReRolls);
+
+        // updates all the textViews so that they display the default at the start
+        P1.updateScoreTxt();
+        P1.updateRollScoreTxt();
+        P1.updateReRollsTxt();
+
+        // updates all the textViews so that they display the default at the start
+        CPU.updateScoreTxt();
+        CPU.updateRollScoreTxt();
+        CPU.updateReRollsTxt();
 
 
-        playerScore.setText(P1.name + ": " + P1.score);
-        playerRollScore.setText(P1.name + " roll score: " + P1.rollScore);
-        P1ReRolls.setText(P1.name + " Rolls: " + P1.rolls);
-
-        CPUScore.setText(CPU.name + ": " + CPU.score);
-        CPURollScore.setText(CPU.name + " roll score: " + CPU.rollScore);
-        CPUReRolls.setText(CPU.name + " Rolls: " + CPU.rolls);
+        roundsTxt.setText(roundTxt + rounds);
 
 
-        roundsTxt.setText("round: " + rounds);
-
-
+        // when score is clicked  adds the roll score to the score and reset roll score
         scoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 P1.sumOverallScores();
                 CPU.sumOverallScores();
 
-                playerScore.setText(P1.name + ": " + P1.score);
-                CPUScore.setText(CPU.name + ": " + CPU.score);
+                // displaying players overall score
+                P1.updateScoreTxt();
+                CPU.updateScoreTxt();
+
+                // reset players roll score
+                P1.RollScoreReset();
+                CPU.RollScoreReset();
+
+                // reset players roll score display
+
+
+                // add 1 to the rounds counter and displays the counter again
+                rounds =rounds + 1;
+                roundsTxt.setText(roundTxt + rounds);
+
+               // if(P1.ScoreTxt => 101 && Cpu.ScoreTxt => 101 ){
+                // tie breaker
+                // }else if(P1.ScoreTxt => 101 || Cpu.ScoreTxt => 101 ){
+                // end screen showing who won.
+                // }
             }
         });
 
@@ -119,9 +130,7 @@ public class NewGame extends AppCompatActivity  {
                 // roll the dice for both players
                 diceRoller.roll(P1.dice, P1.DiceImages);
                 diceRoller.roll(CPU.dice, CPU.DiceImages);
-                // add 1 to the rounds counter and displays the counter again
-                rounds =rounds + 1;
-                roundsTxt.setText("round: " + rounds);
+
                 /*
                 * for later
                 *
@@ -131,11 +140,11 @@ public class NewGame extends AppCompatActivity  {
                 * */
 
                   P1.sumScores();
-                  playerRollScore.setText(P1.name + " roll score: " + P1.rollScore);
+                  P1.updateRollScoreTxt();
 
 
                   CPU.sumScores();
-                  CPURollScore.setText(CPU.name + " roll score: " + CPU.rollScore);
+                  CPU.updateRollScoreTxt();
 
 
               }else if(P1.rolls != 0){

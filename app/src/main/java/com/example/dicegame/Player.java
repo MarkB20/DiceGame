@@ -1,14 +1,30 @@
 package com.example.dicegame;
 
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class Player {
-     String name;
+
+    // initializing scoring elements
+    String name;
     int score = 0;
     int rollScore = 0;
     int rolls = 3;
+
+
+    // initializing dice elements
     ImageView[] DiceImages = new ImageView[5];
     int[] dice = new int[5];
+
+
+    // initializing textView elements
+    TextView ScoreTxt;
+    TextView RollScoreTxt;
+    TextView ReRollsTxt;
+
+
+
+
     public Player(String PName){
          name = PName;
     }
@@ -36,6 +52,26 @@ public class Player {
         score = score + rollScore;
 
     }
+
+    public void updateScoreTxt(){
+
+        ScoreTxt.setText(name + ": " + score);
+    }
+
+    public void updateRollScoreTxt(){
+        RollScoreTxt.setText(name + " roll score: " + rollScore);
+    }
+
+    public void updateReRollsTxt(){
+
+        ReRollsTxt.setText(name + " Rolls: " + rolls);
+    }
+
+
+
+
+
+
 
 
 
