@@ -9,6 +9,7 @@
 
     <ImageView
         android:id="@+id/CPUDice3"
+        android:contentDescription="CPUDice3 dice image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="52dp"
@@ -22,6 +23,7 @@
 
     <ImageView
         android:id="@+id/CPUDice5"
+        android:contentDescription="CPUDice5 dice image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="19dp"
@@ -33,6 +35,7 @@
 
     <ImageView
         android:id="@+id/CPUDice1"
+        android:contentDescription="CPUDice1 dice image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -45,6 +48,7 @@
 
     <ImageView
         android:id="@+id/CPUDice4"
+        android:contentDescription="CPUDice4 dice image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="20dp"
@@ -56,6 +60,7 @@
 
     <ImageView
         android:id="@+id/CPUDice2"
+        android:contentDescription="CPUDice2 dice image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="17dp"
@@ -67,16 +72,16 @@
 
     <TextView
         android:id="@+id/rounds"
-        android:layout_width="97dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginBottom="66dp"
+        android:layout_width="197dp"
+        android:layout_height="29dp"
         android:text="round: 1"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/PlayerRollScore"
+        app:layout_constraintBottom_toTopOf="@+id/P1Dice3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.368" />
 
     <TextView
         android:id="@+id/playerScore"
@@ -100,12 +105,16 @@
 
     <TextView
         android:id="@+id/P1ReRolls"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="28dp"
+        android:contentDescription="P1ReRolls dice image"
+        android:hint="e.g 1"
+        android:layout_width="223dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="40dp"
         android:text="re-rolls: 2"
-        app:layout_constraintStart_toEndOf="@+id/rounds"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.596"
+        app:layout_constraintStart_toEndOf="@+id/PlayerRollScore"
         app:layout_constraintTop_toBottomOf="@+id/rounds" />
 
     <ImageView
@@ -116,6 +125,7 @@
         android:layout_marginTop="82dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="82dp"
+        android:contentDescription="@string/app_name"
         android:onClick="onClickRoll"
         app:layout_constraintBottom_toTopOf="@+id/CPUScore"
         app:layout_constraintEnd_toStartOf="@+id/P1Dice2"
@@ -128,6 +138,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
+        android:contentDescription="@string/dice_image"
         android:onClick="onClickRoll"
         app:layout_constraintBottom_toBottomOf="@+id/P1Dice3"
         app:layout_constraintEnd_toStartOf="@+id/P1Dice3"
@@ -140,6 +151,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="19dp"
+        android:contentDescription="@string/dice_image"
         android:onClick="onClickRoll"
         app:layout_constraintBottom_toBottomOf="@+id/P1Dice4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -154,6 +166,7 @@
         android:layout_marginTop="82dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="81dp"
+        android:contentDescription="@string/dice_image"
         android:onClick="onClickRoll"
         app:layout_constraintBottom_toTopOf="@+id/CPUScore"
         app:layout_constraintEnd_toStartOf="@+id/P1Dice4"
@@ -166,6 +179,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="20dp"
+        android:contentDescription="@string/dice_image"
         android:onClick="onClickRoll"
         app:layout_constraintBottom_toBottomOf="@+id/P1Dice3"
         app:layout_constraintEnd_toStartOf="@+id/P1Dice5"
@@ -195,12 +209,15 @@
 
     <TextView
         android:id="@+id/CPUReRolls"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="232dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="364dp"
         android:text="re-rolls: 2"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/CPUDice4"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/Throw"

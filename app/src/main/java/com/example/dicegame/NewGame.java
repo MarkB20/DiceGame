@@ -2,17 +2,29 @@ package com.example.dicegame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class NewGame extends AppCompatActivity  {
     //initializing the dice images for both player (P1) and computer(CPU)
 
-
+    // Todo add color contrast using a color contrast picker using the red and white from dice:
+    //#D51D1B
+    //#AF0C0D
+    //#DADADA
+    //#72A6A9
+    //#2E3B2C
+    // Todo find out how to fix errors in the activity images
 
     // classes
     DiceRoller diceRoller = new DiceRoller();
@@ -75,15 +87,11 @@ public class NewGame extends AppCompatActivity  {
         CPU.RollScoreTxt = (TextView) findViewById(R.id.CPURollScore);
         CPU.ReRollsTxt = (TextView) findViewById(R.id.CPUReRolls);
 
-        // updates all the textViews so that they display the default at the start
-        P1.updateScoreTxt();
-        P1.updateRollScoreTxt();
-        P1.updateReRollsTxt();
 
-        // updates all the textViews so that they display the default at the start
-        CPU.updateScoreTxt();
-        CPU.updateRollScoreTxt();
-        CPU.updateReRollsTxt();
+        P1.updateTxt();
+
+
+        CPU.updateTxt();
 
 
         roundsTxt.setText(roundTxt + rounds);
@@ -99,7 +107,8 @@ public class NewGame extends AppCompatActivity  {
 //        });
 
 
-
+        P1.selectReset();
+        CPU.selectReset();
         // when score is clicked  adds the roll score to the score and reset roll score
         scoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,52 +125,59 @@ public class NewGame extends AppCompatActivity  {
         throwButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                P1.RollScoreReset();
-                CPU.RollScoreReset();
-              if(P1.rolls == 3 && CPU.rolls == 3){
+
+                if(rounds == -1){
+                    P1.throwDice();
+                    CPU.throwDice();
+                    score();
+                }
+
+
                 // roll the dice for both players
-                diceRoller.roll(P1.dice, P1.DiceImages,P1.boolReRoll);
-                diceRoller.roll(CPU.dice, CPU.DiceImages,P1.boolReRoll);
+                    P1.throwDice();
+                    CPU.throwDice();
 
 
-                 P1.rolls = P1.rolls - 1;
-                 CPU.rolls = CPU.rolls - 1;
+                // for any number 3 and above keep unless losing by 20 then 4 and above
+
+                if (P1.score - CPU.score >= 20 ){
+                    CPU.autoSelect(3);
+
+                }else{
+                    CPU.autoSelect(2);
+
+                }
 
 
 
-                  P1.sumScores();
-                  P1.updateRollScoreTxt();
-                  P1.updateReRollsTxt();
 
 
-                  CPU.sumScores();
-                  CPU.updateRollScoreTxt();
-                  CPU.updateReRollsTxt();
+
+                 if(P1.rolls == 0){
 
 
-              }else if(P1.rolls != 0){
-                // re roll for player
+
+//                     if CPU re rolls separately
+//                     while(CPU.rolls != 0){
+//
+//
+//                         CPU.updateTxt();
+//
+//                      CPU.updateTxt();
+//                     }
 
 
-                  P1.rolls = P1.rolls - 1;
-
-                  diceRoller.roll(P1.dice, P1.DiceImages,P1.boolReRoll);
-
-                  P1.sumScores();
-                  P1.updateRollScoreTxt();
-
-                  P1.selectReset();
 
 
-              }else if(CPU.rolls!= 0){
-                // re roll for CPU automatically with logic
-                  CPU.rolls = CPU.rolls - 2;
-                  diceRoller.roll(CPU.dice, CPU.DiceImages, CPU.boolReRoll);
-              }else{
-                  score();
 
+
+                     score();
+
+
+
+                 }
               }
-            }
+
 
         });
 
@@ -171,11 +187,19 @@ public class NewGame extends AppCompatActivity  {
 
     }
 
+
+    // checks to see what image gets
     public void onClickRoll(final View view){
 
-        if(view.getId() == R.id.P1Dice1){
-            P1.selectDice(0);
 
+        if(P1.rolls == 3){
+            Toast.makeText(getApplicationContext(), "must throw first",Toast.LENGTH_SHORT).show();
+
+        }else if(rounds == -1){
+            Toast.makeText(getApplicationContext(), "no re-rolls on tie breaker",Toast.LENGTH_SHORT).show();
+
+        }else if(view.getId() == R.id.P1Dice1){
+            P1.selectDice(0);
 
         }else if(view.getId() == R.id.P1Dice2){
             P1.selectDice(1);
@@ -194,33 +218,94 @@ public class NewGame extends AppCompatActivity  {
 
 
     }
+
+
     public  void score (){
+        // reset the selection dice function
         P1.boolReRollReset();
         CPU.boolReRollReset();
 
+        // sum up the current roll score with the actual score
         P1.sumOverallScores();
         CPU.sumOverallScores();
 
-        // displaying players overall score
-        P1.updateScoreTxt();
-        CPU.updateScoreTxt();
 
         // reset players roll score
         P1.RollScoreReset();
         CPU.RollScoreReset();
 
-        // reset players roll score display
+        System.out.println(P1.score);
+        System.out.println(CPU.score);
+
+        if(rounds == -1){
+            Intent intent = new Intent(getBaseContext(), End.class);
+            intent.putExtra("P1.score", P1.score);
+            intent.putExtra("CPU.score", CPU.score);
+            intent.putExtra("rounds",rounds);
+            startActivity(intent);
+
+        }
+
+         if(P1.score >= 101 && CPU.score >= 101 ){
+
+             //TODO implement tie breaker
+             // tie breaker
+             rounds = -1;
+             roundsTxt.setText(roundTxt + "Tie breaker");
+
+             // resets everything
+             P1.tieBreaker();
+             CPU.tieBreaker();
+
+
+         }else if(P1.score >= 101 || CPU.score >= 101 ){
+         // end screen showing who won.
+
+
+             Intent intent = new Intent(getBaseContext(), End.class);
+             intent.putExtra("P1.score", P1.score);
+             intent.putExtra("CPU.score", CPU.score);
+             intent.putExtra("rounds",rounds);
+             startActivity(intent);
+         }else{
+             rounds =rounds + 1;
+             roundsTxt.setText(roundTxt + rounds);
+
+
+             // reset how many rolls the user gets
+             P1.RollReset();
+             CPU.RollReset();
+
+             // updates all the text displayed to show new results
+             P1.updateTxt();
+             CPU.updateTxt();
+
+             // reset the current dice roll score
+             P1.RollScoreReset();
+             CPU.RollScoreReset();
+
+             // reset what dice are selected
+             P1.selectReset();
+             CPU.selectReset();
+
+             // Todo add winning condition
+             //      - add tie breaker
+             // Todo add ai using there re rolls if user just went to score and didn't re-roll
+
+             // throws the dice automatically
+             P1.throwDice();
+             CPU.throwDice();
+
+
+
+         }
+
+
 
 
         // add 1 to the rounds counter and displays the counter again
-        rounds =rounds + 1;
-        roundsTxt.setText(roundTxt + rounds);
 
-        // if(P1.ScoreTxt => 101 && Cpu.ScoreTxt => 101 ){
-        // tie breaker
-        // }else if(P1.ScoreTxt => 101 || Cpu.ScoreTxt => 101 ){
-        // end screen showing who won.
-        // }
+
 
     }
 
