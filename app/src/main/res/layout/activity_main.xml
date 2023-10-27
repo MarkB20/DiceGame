@@ -10,34 +10,73 @@
         android:id="@+id/Logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="26dp"
         android:text="Dice game"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/EasyGame"
+        app:layout_constraintEnd_toEndOf="@+id/EasyGame"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/newGame"
+        android:id="@+id/EasyGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="165dp"
-        android:layout_marginBottom="165dp"
+        android:layout_marginBottom="54dp"
         android:onClick="newGame"
-        android:text="New game"
-        app:layout_constraintBottom_toTopOf="@+id/about"
+        android:text="easy game"
+        app:layout_constraintBottom_toTopOf="@+id/HardGame"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Logo" />
+        app:layout_constraintTop_toBottomOf="@+id/Logo" />
+
+    <Button
+        android:id="@+id/HardGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="28dp"
+        android:onClick="newGame"
+        android:text="Hard game"
+        app:layout_constraintBottom_toTopOf="@+id/about"
+        app:layout_constraintStart_toStartOf="@+id/EasyGame"
+        app:layout_constraintTop_toBottomOf="@+id/EasyGame" />
 
     <Button
         android:id="@+id/about"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="217dp"
-        android:onClick="aboutPage"
+        android:layout_marginStart="14dp"
+        android:layout_marginBottom="98dp"
         android:text="About"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        app:layout_constraintStart_toStartOf="@+id/HardGame"
+        app:layout_constraintTop_toBottomOf="@+id/HardGame" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editScore">
+
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/editScore"
+        android:layout_width="269dp"
+        android:layout_height="77dp"
+        android:layout_marginTop="321dp"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:hint="Enter score here"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

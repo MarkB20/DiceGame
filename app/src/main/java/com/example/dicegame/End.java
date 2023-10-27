@@ -2,8 +2,10 @@ package com.example.dicegame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.TextView;
 
 public class End extends AppCompatActivity {
@@ -12,6 +14,9 @@ public class End extends AppCompatActivity {
     TextView CPUScoreTxt;
 
     TextView winTxt;
+
+
+    //ToDO implement buttons for main menu
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +29,12 @@ public class End extends AppCompatActivity {
         System.out.println("P1.score" + P1Score);
         System.out.println("P1.score" + P1Score);
 
-        roundsTxt = (TextView) findViewById(R.id.endRound);
-        P1ScoreTxt = (TextView) findViewById(R.id.P1Score);
-        CPUScoreTxt = (TextView) findViewById(R.id.CPUScoreF);
-        winTxt = (TextView) findViewById(R.id.Winner);
+        roundsTxt = findViewById(R.id.endRound);
+        P1ScoreTxt = findViewById(R.id.P1Score);
+        CPUScoreTxt = findViewById(R.id.CPUScoreF);
+        winTxt = findViewById(R.id.Winner);
+
+
 
 
 
@@ -52,10 +59,11 @@ public class End extends AppCompatActivity {
         if(P1Score > CPUScore ){
             winTxt.setText("Player wins");
             winTxt.setTextColor(Color.argb(200, 0, 255, 0));
+            ScoreHolder.getInstance().setP1Win();
         }else if(P1Score < CPUScore){
             winTxt.setText("CPU wins");
             winTxt.setTextColor(Color.argb(200, 255, 0, 0));
-
+            ScoreHolder.getInstance().setCPUWin();
         }else{
 
             winTxt.setText("Tie");
@@ -63,4 +71,16 @@ public class End extends AppCompatActivity {
         }
 
     }
+
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.isTracking()
+                && !event.isCanceled()) {
+            // *** Your Code ***
+            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
+    }
+
 }

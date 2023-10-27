@@ -14,20 +14,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Objects;
 
 public class NewGame extends AppCompatActivity  {
-    //initializing the dice images for both player (P1) and computer(CPU)
-
     // Todo add color contrast using a color contrast picker using the red and white from dice:
+
     //#D51D1B
     //#AF0C0D
     //#DADADA
     //#72A6A9
     //#2E3B2C
-    // Todo find out how to fix errors in the activity images
 
-    // classes
-    DiceRoller diceRoller = new DiceRoller();
 
     // creating new objects for each player
     Player P1 = new Player("Player");
@@ -40,12 +37,19 @@ public class NewGame extends AppCompatActivity  {
 
 
     TextView roundsTxt;
+    TextView winText;
     int rounds = 0;
 
 
 
     // Strings for each TextView display
     String roundTxt = "round: ";
+
+    String mode;
+    int maxScore = 101;
+
+    int P1Win = ScoreHolder.getInstance().getP1Win();
+    int CPUWin= ScoreHolder.getInstance().getCPUWin();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,15 @@ public class NewGame extends AppCompatActivity  {
 
         throwButton = findViewById(R.id.Throw);
         scoreButton = findViewById(R.id.Score);
+
+
+         mode = getIntent().getStringExtra("mode");
+         maxScore = getIntent().getIntExtra("max", 101);
+
+
+
+         System.out.println(maxScore);
+
 
 
 
@@ -71,44 +84,27 @@ public class NewGame extends AppCompatActivity  {
         CPU.DiceImages[3]= findViewById(R.id.CPUDice4);
         CPU.DiceImages[4]= findViewById(R.id.CPUDice5);
 
-        //displays all ones before the game starts
-        diceRoller.diceInt(P1.DiceImages,CPU.DiceImages);
-
        // assigning textview for the round score
-        roundsTxt = (TextView) findViewById(R.id.rounds);
+        roundsTxt = findViewById(R.id.rounds);
+        winText = findViewById(R.id.WinTxt);
 
         // assigning each textview for P1
-        P1.ScoreTxt = (TextView) findViewById(R.id.playerScore);
-        P1.RollScoreTxt = (TextView) findViewById(R.id.PlayerRollScore);
-        P1.ReRollsTxt = (TextView) findViewById(R.id.P1ReRolls);
+        P1.ScoreTxt = findViewById(R.id.playerScore);
+        P1.RollScoreTxt = findViewById(R.id.PlayerRollScore);
+        P1.ReRollsTxt = findViewById(R.id.P1ReRolls);
 
         // assigning each textview for CPU
-        CPU.ScoreTxt = (TextView) findViewById(R.id.CPUScore);
-        CPU.RollScoreTxt = (TextView) findViewById(R.id.CPURollScore);
-        CPU.ReRollsTxt = (TextView) findViewById(R.id.CPUReRolls);
+        CPU.ScoreTxt = findViewById(R.id.CPUScore);
+        CPU.RollScoreTxt = findViewById(R.id.CPURollScore);
+        CPU.ReRollsTxt = findViewById(R.id.CPUReRolls);
 
-
+        // update text before game starts
         P1.updateTxt();
-
-
         CPU.updateTxt();
 
-
         roundsTxt.setText(roundTxt + rounds);
+        winText.setText("P1: " + P1Win + " | CPU: " + CPUWin);
 
-
-
-//        P1.DiceImages[0].setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                P1.DiceImages[0].setColorFilter(Color.argb(50, 0, 0, 0)
-//                );
-//            }
-//        });
-
-
-        P1.selectReset();
-        CPU.selectReset();
         // when score is clicked  adds the roll score to the score and reset roll score
         scoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,51 +135,13 @@ public class NewGame extends AppCompatActivity  {
 
 
                 // for any number 3 and above keep unless losing by 20 then 4 and above
-
-                if (P1.score - CPU.score >= 20 ){
-                    CPU.autoSelect(3);
-
-                }else{
-                    CPU.autoSelect(2);
-
-                }
-
-
-
-
-
+                AIMode();
 
                  if(P1.rolls == 0){
-
-
-
-//                     if CPU re rolls separately
-//                     while(CPU.rolls != 0){
-//
-//
-//                         CPU.updateTxt();
-//
-//                      CPU.updateTxt();
-//                     }
-
-
-
-
-
-
                      score();
-
-
-
                  }
               }
-
-
         });
-
-
-
-
 
     }
 
@@ -214,14 +172,27 @@ public class NewGame extends AppCompatActivity  {
             P1.selectDice(4);
 
         }
-
-
-
     }
 
 
     public  void score (){
         // reset the selection dice function
+        while(CPU.rolls != 0){
+            CPU.updateTxt();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            AIMode();
+
+            CPU.rolls = CPU.rolls -1;
+            CPU.updateTxt();
+        }
+
+
+
         P1.boolReRollReset();
         CPU.boolReRollReset();
 
@@ -237,7 +208,23 @@ public class NewGame extends AppCompatActivity  {
         System.out.println(P1.score);
         System.out.println(CPU.score);
 
-        if(rounds == -1){
+        // when the user has a tie breaker and there is a winner send to end screen but if its a tie again go again
+        if(rounds == -1 && CPU.score == P1.score){
+
+            // resets everything
+            P1.tieBreaker();
+            CPU.tieBreaker();
+
+        }else if(rounds == -1 && CPU.score != P1.score ){
+
+            P1.updateTxt();
+            CPU.updateTxt();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
             Intent intent = new Intent(getBaseContext(), End.class);
             intent.putExtra("P1.score", P1.score);
             intent.putExtra("CPU.score", CPU.score);
@@ -246,10 +233,7 @@ public class NewGame extends AppCompatActivity  {
 
         }
 
-         if(P1.score >= 101 && CPU.score >= 101 ){
-
-             //TODO implement tie breaker
-             // tie breaker
+         if(P1.score >= maxScore && CPU.score == P1.score ){
              rounds = -1;
              roundsTxt.setText(roundTxt + "Tie breaker");
 
@@ -257,10 +241,14 @@ public class NewGame extends AppCompatActivity  {
              P1.tieBreaker();
              CPU.tieBreaker();
 
-
-         }else if(P1.score >= 101 || CPU.score >= 101 ){
+         }else if(P1.score >= maxScore || CPU.score >= maxScore ){
          // end screen showing who won.
-
+            CPU.updateTxt();
+             try {
+                 Thread.sleep(500);
+             } catch (InterruptedException e) {
+                 throw new RuntimeException(e);
+             }
 
              Intent intent = new Intent(getBaseContext(), End.class);
              intent.putExtra("P1.score", P1.score);
@@ -288,14 +276,12 @@ public class NewGame extends AppCompatActivity  {
              P1.selectReset();
              CPU.selectReset();
 
-             // Todo add winning condition
-             //      - add tie breaker
-             // Todo add ai using there re rolls if user just went to score and didn't re-roll
-
              // throws the dice automatically
              P1.throwDice();
              CPU.throwDice();
 
+
+             AIMode();
 
 
          }
@@ -303,9 +289,45 @@ public class NewGame extends AppCompatActivity  {
 
 
 
+
+
         // add 1 to the rounds counter and displays the counter again
 
 
+
+    }
+
+    public void AIMode(){
+
+        if(Objects.equals(mode, "Easy")){
+
+            int min = 1;
+            int max = 6;
+            int range = max - min + 1;
+// generate random numbers within 1 to 10
+            for (int i = 0; i < CPU.boolReRoll.length; i++ ){
+                int rand = (int)(Math.random() * range) + min;
+                if(rand == 1){
+                    CPU.selectDice(i);
+                }
+
+            }
+
+        }else if(Objects.equals(mode, "Hard")){
+            if (P1.score - CPU.score >= 20 ){
+                CPU.autoSelect(3);
+
+            }else{
+                CPU.autoSelect(2);
+
+            }
+
+
+
+
+
+
+        }
 
     }
 
