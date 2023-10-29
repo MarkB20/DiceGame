@@ -9,7 +9,6 @@ public class DiceRoller {
    public void roll(int[] dice, ImageView[] diceImages, boolean[] reRoll){
 
        int min = 1;
-
        int max = 6;
        int range = max - min + 1;
 // generate random numbers within 1 to 10

@@ -56,7 +56,7 @@ public class End extends AppCompatActivity {
         P1ScoreTxt.setText(P1ScoreString);
         CPUScoreTxt.setText(CPUScoreString);
 
-        //point 7
+        // point 7
 
         if(P1Score > CPUScore ){
             winTxt.setText("Player wins");
@@ -66,7 +66,6 @@ public class End extends AppCompatActivity {
             winTxt.setText("CPU wins");
             winTxt.setTextColor(Color.argb(200, 255, 0, 0));
             ScoreHolder.getInstance().setCPUWin();
-            System.out.println("CPU score: "+ScoreHolder.getInstance().getCPUWin());
         }else{
             // catch any errors
             winTxt.setText("Error");
@@ -86,7 +85,7 @@ public class End extends AppCompatActivity {
 
     }
 
-    //point 8
+    // point 8
 
     // on release of the back button the user is taken back to the main menu
     public boolean onKeyUp(int keyCode, KeyEvent keyEvent) {

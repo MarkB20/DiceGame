@@ -92,7 +92,7 @@ public class NewGame extends AppCompatActivity  {
         winText.setText("Player: " + P1Win + " | CPU: " + CPUWin);
 
 
-        //point 3.5
+        // point 3.5
 
         // when score is clicked  adds the roll score to the score and reset roll score
         scoreButton.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +110,7 @@ public class NewGame extends AppCompatActivity  {
         });
 
 
-        //point 3
+        // point 3
         /*
         *  when the throw button is clicked it will
         *  randomize the dice for both P1 and CPU at the start
@@ -147,7 +147,7 @@ public class NewGame extends AppCompatActivity  {
     // checks to see what image gets
     public void onClickRoll(final View view){
 
-//point 5
+// point 5
 
         // if the player hasn't stated or is in a tie breaker: disallow this feature
         if(P1.rolls == 3){
@@ -177,7 +177,7 @@ public class NewGame extends AppCompatActivity  {
 
     // function for when the user scores with by button press or automatically when out of re-rolls
     public  void score (){
-        //point 4
+        // point 4
 
         // if the CPU still has re-rolls it will do so using the provided difficulty using AI Mode
         while(CPU.rolls > 0){
@@ -227,7 +227,7 @@ public class NewGame extends AppCompatActivity  {
         }
 
 
-        // point 9
+        //  point 9
 
         // if there is a tie then activate tie breaker
          if((P1.score >= maxScore && CPU.score == P1.score) || rounds == -1 ){
@@ -288,7 +288,7 @@ public class NewGame extends AppCompatActivity  {
         // if the player chooses easy mode then the AI is random
         if(Objects.equals(mode, "Easy")){
 
-            //point 6
+            // point 6
 
             int min = 1;
             int max = 5;
@@ -305,7 +305,7 @@ public class NewGame extends AppCompatActivity  {
             // if the player chooses hard mode then the AI follows logic described bellow
         }else if(Objects.equals(mode, "Hard")){
 
-            //point 12
+            // point 12
 
             //if the CPU is losing by 10 have the CPU keep numbers above 3 otherwise above 2
             if (P1.score - CPU.score >= 10 ){
