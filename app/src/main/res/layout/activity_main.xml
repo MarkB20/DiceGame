@@ -4,28 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/darkGreen"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/Logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="26dp"
+        android:layout_marginBottom="33dp"
         android:text="Dice game"
+        android:textColor="@color/dice"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/EasyGame"
-        app:layout_constraintEnd_toEndOf="@+id/EasyGame"
+        app:layout_constraintStart_toStartOf="@+id/EasyGame"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/EasyGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="54dp"
+        android:layout_marginBottom="36dp"
+        android:backgroundTint="@color/teal"
         android:onClick="newGame"
-        android:text="easy game"
+        android:text="new game : easy"
+        android:textColor="@color/dice"
         app:layout_constraintBottom_toTopOf="@+id/HardGame"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,10 +39,12 @@
         android:id="@+id/HardGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="31dp"
+        android:backgroundTint="@color/teal"
         android:onClick="newGame"
-        android:text="Hard game"
+        android:text="new game: hard"
+        android:textColor="@color/dice"
         app:layout_constraintBottom_toTopOf="@+id/about"
         app:layout_constraintStart_toStartOf="@+id/EasyGame"
         app:layout_constraintTop_toBottomOf="@+id/EasyGame" />
@@ -47,10 +53,12 @@
         android:id="@+id/about"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginBottom="98dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginBottom="29dp"
+        android:backgroundTint="@color/teal"
         android:text="About"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        android:textColor="@color/dice"
+        app:layout_constraintBottom_toTopOf="@+id/editScore"
         app:layout_constraintStart_toStartOf="@+id/HardGame"
         app:layout_constraintTop_toBottomOf="@+id/HardGame" />
 
@@ -68,15 +76,19 @@
 
     <EditText
         android:id="@+id/editScore"
-        android:layout_width="269dp"
-        android:layout_height="77dp"
-        android:layout_marginTop="321dp"
+        android:layout_width="264dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="71dp"
+        android:layout_marginEnd="71dp"
         android:layout_marginBottom="32dp"
         android:ems="10"
         android:hint="Enter score here"
         android:inputType="numberDecimal"
+        android:textAlignment="center"
+        android:textColor="@color/dice"
+        android:textColorHint="@color/dice"
         app:layout_constraintBottom_toTopOf="@+id/frameLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/about" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,7 @@ public class AboutFragment extends Fragment {
 
     View view;
 
-    Button button;
+    //point 2
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){

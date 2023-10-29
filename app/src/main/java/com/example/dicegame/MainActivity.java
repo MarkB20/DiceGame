@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        //point 1
         easyGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+        //point 10
         public void mode(String mode){
             ScoreTxt[0] = score.getText().toString();
             if(!ScoreTxt[0].isEmpty()){

@@ -17,14 +17,6 @@ import android.widget.Toast;
 import java.util.Objects;
 
 public class NewGame extends AppCompatActivity  {
-    // Todo add color contrast using a color contrast picker using the red and white from dice:
-
-    //#D51D1B
-    //#AF0C0D
-    //#DADADA
-    //#72A6A9
-    //#2E3B2C
-
 
     // creating new objects for each player
     Player P1 = new Player("Player");
@@ -36,6 +28,7 @@ public class NewGame extends AppCompatActivity  {
     Button scoreButton;
 
 
+    //text view for displaying non player info
     TextView roundsTxt;
     TextView winText;
     int rounds = 0;
@@ -45,11 +38,13 @@ public class NewGame extends AppCompatActivity  {
     // Strings for each TextView display
     String roundTxt = "round: ";
 
+    // variables fro the main menu passed through
     String mode;
     int maxScore = 101;
 
     int P1Win = ScoreHolder.getInstance().getP1Win();
     int CPUWin= ScoreHolder.getInstance().getCPUWin();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,16 +54,11 @@ public class NewGame extends AppCompatActivity  {
         throwButton = findViewById(R.id.Throw);
         scoreButton = findViewById(R.id.Score);
 
-
+        //getting the mode selected so that the AI will be random or follow logic
          mode = getIntent().getStringExtra("mode");
-         maxScore = getIntent().getIntExtra("max", 101);
+         // getting the max score that the players must hit to win
 
-
-
-         System.out.println(maxScore);
-
-
-
+        maxScore = getIntent().getIntExtra("max", 101);
 
         // assigning each image to the image view for P1
         P1.DiceImages[0] = findViewById(R.id.P1Dice1);
@@ -102,18 +92,30 @@ public class NewGame extends AppCompatActivity  {
         P1.updateTxt();
         CPU.updateTxt();
 
+        // update for non user text
         roundsTxt.setText(roundTxt + rounds);
-        winText.setText("P1: " + P1Win + " | CPU: " + CPUWin);
+        winText.setText("Player: " + P1Win + " | CPU: " + CPUWin);
+
+
+        //point 3.5
 
         // when score is clicked  adds the roll score to the score and reset roll score
         scoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              score();
+                // if tie breaker (-1) is triggered then disable score function and tey user that they can use it
+                // otherwise trigger the score function
+                if (rounds == -1){
+                    Toast.makeText(getApplicationContext(), "only throw in tie breaker",Toast.LENGTH_SHORT).show();
+                }else{
+                    score();
+                }
+
             }
         });
 
 
+        //point 3
         /*
         *  when the throw button is clicked it will
         *  randomize the dice for both P1 and CPU at the start
@@ -122,16 +124,17 @@ public class NewGame extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
 
+                // roll the dice for both players
+                P1.throwDice();
+                CPU.throwDice();
+
+                // when tie breaker (-1) happens then it just throws the dice and scores
                 if(rounds == -1){
-                    P1.throwDice();
-                    CPU.throwDice();
                     score();
                 }
 
 
-                // roll the dice for both players
-                    P1.throwDice();
-                    CPU.throwDice();
+
 
 
                 // for any number 3 and above keep unless losing by 20 then 4 and above
@@ -149,7 +152,9 @@ public class NewGame extends AppCompatActivity  {
     // checks to see what image gets
     public void onClickRoll(final View view){
 
+//point 5
 
+        // if the player hasn't stated or is in a tie breaker: disallow this feature
         if(P1.rolls == 3){
             Toast.makeText(getApplicationContext(), "must throw first",Toast.LENGTH_SHORT).show();
 
@@ -175,24 +180,23 @@ public class NewGame extends AppCompatActivity  {
     }
 
 
+    // function for when the user scores with by button press or automatically when out of re-rolls
     public  void score (){
-        // reset the selection dice function
-        while(CPU.rolls != 0){
-            CPU.updateTxt();
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+        //point 4
+
+        // if the CPU still has re-rolls it will do so using the provided difficulty using AI Mode
+        while(CPU.rolls > 0){
+
+            CPU.throwDice();
 
             AIMode();
 
-            CPU.rolls = CPU.rolls -1;
             CPU.updateTxt();
+
         }
 
 
-
+        // reset the selected dice
         P1.boolReRollReset();
         CPU.boolReRollReset();
 
@@ -200,13 +204,10 @@ public class NewGame extends AppCompatActivity  {
         P1.sumOverallScores();
         CPU.sumOverallScores();
 
-
         // reset players roll score
         P1.RollScoreReset();
         CPU.RollScoreReset();
 
-        System.out.println(P1.score);
-        System.out.println(CPU.score);
 
         // when the user has a tie breaker and there is a winner send to end screen but if its a tie again go again
         if(rounds == -1 && CPU.score == P1.score){
@@ -215,15 +216,12 @@ public class NewGame extends AppCompatActivity  {
             P1.tieBreaker();
             CPU.tieBreaker();
 
+            // if someone wins the tie breaker
         }else if(rounds == -1 && CPU.score != P1.score ){
 
             P1.updateTxt();
             CPU.updateTxt();
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+
 
             Intent intent = new Intent(getBaseContext(), End.class);
             intent.putExtra("P1.score", P1.score);
@@ -233,7 +231,8 @@ public class NewGame extends AppCompatActivity  {
 
         }
 
-         if(P1.score >= maxScore && CPU.score == P1.score ){
+        // if there is a tie then activate tie breaker
+         if((P1.score >= maxScore && CPU.score == P1.score) || rounds == -1 ){
              rounds = -1;
              roundsTxt.setText(roundTxt + "Tie breaker");
 
@@ -241,14 +240,10 @@ public class NewGame extends AppCompatActivity  {
              P1.tieBreaker();
              CPU.tieBreaker();
 
+             // if some one has won
          }else if(P1.score >= maxScore || CPU.score >= maxScore ){
          // end screen showing who won.
             CPU.updateTxt();
-             try {
-                 Thread.sleep(500);
-             } catch (InterruptedException e) {
-                 throw new RuntimeException(e);
-             }
 
              Intent intent = new Intent(getBaseContext(), End.class);
              intent.putExtra("P1.score", P1.score);
@@ -256,6 +251,7 @@ public class NewGame extends AppCompatActivity  {
              intent.putExtra("rounds",rounds);
              startActivity(intent);
          }else{
+             // if no tie breakers or wins happens
              rounds =rounds + 1;
              roundsTxt.setText(roundTxt + rounds);
 
@@ -280,31 +276,26 @@ public class NewGame extends AppCompatActivity  {
              P1.throwDice();
              CPU.throwDice();
 
-
+            // have the CPU select its dice since the dice are thrown
              AIMode();
 
 
          }
 
-
-
-
-
-
-        // add 1 to the rounds counter and displays the counter again
-
-
-
     }
 
+    // dictates what the CPU does depending on if the user chosen easy or hard mode
     public void AIMode(){
 
+        // if the player chooses easy mode then the AI is random
         if(Objects.equals(mode, "Easy")){
 
+            //point 6
+
             int min = 1;
-            int max = 6;
+            int max = 5;
             int range = max - min + 1;
-// generate random numbers within 1 to 10
+// generate random numbers within 1 to 5
             for (int i = 0; i < CPU.boolReRoll.length; i++ ){
                 int rand = (int)(Math.random() * range) + min;
                 if(rand == 1){
@@ -313,8 +304,13 @@ public class NewGame extends AppCompatActivity  {
 
             }
 
+            // if the player chooses hard mode then the AI follows logic described bellow
         }else if(Objects.equals(mode, "Hard")){
-            if (P1.score - CPU.score >= 20 ){
+
+            //point 12
+
+            //if the CPU is losing by 10 have the CPU keep numbers above 3 otherwise above 2
+            if (P1.score - CPU.score >= 10 ){
                 CPU.autoSelect(3);
 
             }else{
@@ -322,14 +318,10 @@ public class NewGame extends AppCompatActivity  {
 
             }
 
-
-
-
-
-
         }
 
     }
+
 
 
 }

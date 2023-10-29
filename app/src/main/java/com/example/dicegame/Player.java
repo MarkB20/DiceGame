@@ -108,7 +108,6 @@ public class Player {
 
     public  void throwDice (){
 
-
         // take away 1 from number of rolls for re-roll
         rolls = rolls - 1;
 

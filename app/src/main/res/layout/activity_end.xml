@@ -4,20 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/darkGreen"
     tools:context=".End">
 
     <TextView
         android:id="@+id/endRound"
-        android:layout_width="270dp"
-        android:layout_height="50dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="70dp"
         android:layout_marginTop="92dp"
+        android:layout_marginEnd="70dp"
         android:layout_marginBottom="41dp"
         android:text="round: 2"
+        android:textColor="@color/dice"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/P1Score"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,8 +28,9 @@
         android:id="@+id/P1Score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="19dp"
+        android:layout_marginBottom="20dp"
         android:text="player score: 30"
+        android:textColor="@color/dice"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/CPUScoreF"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,6 +44,7 @@
         android:layout_marginStart="11dp"
         android:layout_marginBottom="20dp"
         android:text="Cpu score: 20"
+        android:textColor="@color/dice"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/Winner"
         app:layout_constraintStart_toStartOf="@+id/P1Score"
@@ -49,26 +54,16 @@
         android:id="@+id/Winner"
         android:layout_width="139dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="128dp"
         android:text="Player Wins"
+        android:textColor="@color/dice"
+        android:textColorHighlight="@color/white"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/NewGame2"
+        app:layout_constraintBottom_toTopOf="@+id/MainMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CPUScoreF" />
-
-    <Button
-        android:id="@+id/NewGame2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="41dp"
-        android:text="new game"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/MainMenu"
-        app:layout_constraintStart_toStartOf="@+id/MainMenu"
-        app:layout_constraintTop_toBottomOf="@+id/Winner" />
 
     <Button
         android:id="@+id/MainMenu"
@@ -76,9 +71,11 @@
         android:layout_height="0dp"
         android:layout_marginBottom="205dp"
         android:text="Main Menu"
+        android:backgroundTint="@color/teal"
+        android:textColor="@color/dice"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NewGame2" />
+        app:layout_constraintTop_toBottomOf="@+id/Winner" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@
     android:id="@+id/C"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/darkGreen"
     tools:context=".NewGame">
 
     <ImageView
@@ -75,6 +76,7 @@
         android:layout_width="197dp"
         android:layout_height="29dp"
         android:text="round: 1"
+        android:textColor="@color/dice"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/P1Dice3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,6 +92,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginBottom="13dp"
         android:text="player: 0"
+        android:textColor="@color/dice"
         app:layout_constraintBottom_toTopOf="@+id/PlayerRollScore"
         app:layout_constraintStart_toStartOf="@+id/PlayerRollScore" />
 
@@ -100,6 +103,7 @@
         android:layout_marginStart="33dp"
         android:layout_marginTop="142dp"
         android:text="P1 roll score: 0"
+        android:textColor="@color/dice"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -111,6 +115,7 @@
         android:layout_height="27dp"
         android:layout_marginTop="40dp"
         android:text="re-rolls: 2"
+        android:textColor="@color/dice"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.596"
@@ -194,6 +199,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="25dp"
         android:text="CPU: 0"
+        android:textColor="@color/dice"
         app:layout_constraintBottom_toTopOf="@+id/CPURollScore"
         app:layout_constraintStart_toStartOf="@+id/CPURollScore" />
 
@@ -204,6 +210,7 @@
         android:layout_marginStart="33dp"
         android:layout_marginBottom="28dp"
         android:text="CPU roll score: 0"
+        android:textColor="@color/dice"
         app:layout_constraintBottom_toTopOf="@+id/CPUDice1"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -213,6 +220,7 @@
         android:layout_height="32dp"
         android:layout_marginBottom="364dp"
         android:text="re-rolls: 2"
+        android:textColor="@color/dice"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -226,6 +234,8 @@
         android:layout_marginStart="1dp"
         android:layout_marginBottom="36dp"
         android:text="Throw"
+        android:backgroundTint="@color/teal"
+        android:textColor="@color/dice"
         app:layout_constraintBottom_toTopOf="@+id/Score"
         app:layout_constraintStart_toStartOf="@+id/Score" />
 
@@ -235,6 +245,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="61dp"
         android:text="Score"
+        android:backgroundTint="@color/teal"
+        android:textColor="@color/dice"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -243,6 +255,7 @@
         android:id="@+id/WinTxt"
         android:layout_width="116dp"
         android:layout_height="31dp"
+        android:textColor="@color/dice"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
