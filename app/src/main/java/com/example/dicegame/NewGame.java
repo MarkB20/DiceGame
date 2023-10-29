@@ -231,6 +231,9 @@ public class NewGame extends AppCompatActivity  {
 
         }
 
+
+        // point 9
+
         // if there is a tie then activate tie breaker
          if((P1.score >= maxScore && CPU.score == P1.score) || rounds == -1 ){
              rounds = -1;
