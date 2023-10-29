@@ -1,6 +1,6 @@
 package com.example.dicegame;
 
-// point 11
+//point 11
 
 // stores how many times the user or CPU wins
 public class ScoreHolder {
