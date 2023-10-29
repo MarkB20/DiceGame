@@ -11,10 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.lang.ref.WeakReference;
-import java.util.HashMap;
-import java.util.Map;
-
 public class MainActivity extends AppCompatActivity {
     Button about;
     Button easyGame;
