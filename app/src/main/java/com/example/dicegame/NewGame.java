@@ -31,7 +31,7 @@ public class NewGame extends AppCompatActivity  {
     //text view for displaying non player info
     TextView roundsTxt;
     TextView winText;
-    int rounds = 0;
+    int rounds = 1;
 
 
 
